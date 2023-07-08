@@ -1,0 +1,5 @@
+langchain
+openai
+SpeechRecognition
+pyttsx3
+msgraph-sdk
