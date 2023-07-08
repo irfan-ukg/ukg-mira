@@ -1,5 +1,9 @@
-langchain
+langchain[all]
 openai
 SpeechRecognition
 pyttsx3
 msgraph-sdk
+fastapi[all]
+soundfile
+openai-whisper
+gTTS
