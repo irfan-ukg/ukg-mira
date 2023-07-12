@@ -19,7 +19,8 @@ To install the required libraries, run:
 ```bash
 pip install -r requirements.txt
 ```
-
+### Authentication For Flex API
+Flex APIs do not support application to application authentication, so currenlty users need to login once into the MIRA with their UKG Dimensions credintials. In future a federated login point will be implemented to use the same authentication for both Microsoft Teams and Flex APIs
 ### Setting up API keys
 
 You need to obtain API keys for the following services:
