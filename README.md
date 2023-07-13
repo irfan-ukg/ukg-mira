@@ -54,7 +54,8 @@ But using the current generation AI, we see there is an immense opportunity to s
 
 ## Implemenation Design
 
-![Basic-Mira (1)](https://github.com/irfan-ukg/ukg-mira/assets/117180317/a06aa541-5d8f-4f80-ab8f-2e1c83fd6a1a)
+![Basic-Mira (1)](https://github.com/irfan-ukg/ukg-mira/assets/117180317/28f15fb5-79c0-4df2-93d7-2c2941657408)
+
 
 
 ## Future Integration
