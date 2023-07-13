@@ -4,6 +4,7 @@ Mira is a versatile virtual assistant, integrating with Outlook and simplifying 
 
 MIRA is born as part of 48hrs hackathon held at our company on 11th - 13th July, 2023. Contributors: harsh.pundir@ukg.com harshul.gupta@ukg.com bismeet.chawla@ukg.com saiswathi.tella@ukg.com and irfan.sheik@ukg.com
 
+[Demo Video](https://kronos.sharepoint.com/:v:/r/sites/48Hours/Project%20Video%20Submission/July%202023/MIRA-Demo-Submission.mp4?csf=1&web=1&e=A0FoyX)
 
 ## Introduction
 
