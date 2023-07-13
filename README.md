@@ -27,6 +27,7 @@ Advanced features:
 ### Why we did it?
 
 Meeting or shift scheduling using existing tools is extremely painful for reasons. These tools often lack user-friendly interfaces, making it challenging to navigate and input information efficiently. They lack flexibility to accommodate complex scheduling requirements or handle unexpected changes. Moreover, manual entry and coordination lead to human errors, resulting in confusion and scheduling conflicts. Additionally, limited collaboration features make it difficult for teams to coordinate and communicate effectively. The overall inefficiency of these tools hinders productivity and can lead to missed appointments, increased workload, and decreased team morale.
+This just adds a lot more burden on the Frontline workers.
 But using the current generation AI, we see there is an immense opportunity to solve some of these problems.
 
 ### How we did it?
