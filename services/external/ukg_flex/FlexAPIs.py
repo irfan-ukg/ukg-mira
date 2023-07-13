@@ -1,7 +1,7 @@
 import asyncio
 import requests
 
-username = "HarshPundir"
+username = "MichaelMartin"
 password = "Pr0mensi0ns@UKG"
 client_id = "mQeGf3jyuXvySOEOvuTs20HKNZcjIjlo"
 client_secret = "vF5mbhJFz4uRBt7G"
@@ -51,7 +51,7 @@ class Flex:
 
     async def get_my_shifts(self, startdate, enddate):
         '''This api can only be used by employees to see their own shifts'''
-        url = f"https://{hostname}/api/v1/scheduling/employee_schedule"
+        url = f"https://{self.hostname}/api/v1/scheduling/employee_schedule"
         json = await self.get_my_info()
         params = {
             "person_number": json['personNumber'],
@@ -69,7 +69,7 @@ class Flex:
 
     async def get_employee_shifts(self, user_name, startdate, enddate):
         '''This api can only be used by managers or people with access to see other people shifts'''
-        url = f"https://{hostname}/api/v1/scheduling/employee_schedule"
+        url = f"https://{self.hostname}/api/v1/scheduling/employee_schedule"
         response_json = {}
         for i in user_name:
             json_list = await self.get_employees_info_by_username([i])
@@ -145,13 +145,13 @@ class Flex:
 
     async def get_open_shifts(self, startdate, enddate):
         url = f"https://{self.hostname}/api/v1/scheduling/employee_self_schedule_requests/open_shifts/multi_read"
-
+        subtypes = await self.get_open_shift_request_subtypes()
         payload = {
             "where":{
                 "endDate": enddate,
                 "startDate": startdate,
                 "requestSubtypeRef": {
-                    "id": 255
+                    "id": subtypes[0]["id"]
                 }
             }
         }
@@ -165,7 +165,7 @@ class Flex:
         return response.json()
 
     async def request_time_off_full_day_me(self, startdate, enddate):
-        url = f"https://{hostname}/api/v1/scheduling/employee_timeoff"
+        url = f"https://{self.hostname}/api/v1/scheduling/employee_timeoff"
         json = await self.get_my_info()
         payload = {
             # "employee": { "id": json['employeeId'] },
@@ -197,7 +197,7 @@ class Flex:
         :param status: current status, accespts the following values: [CANCELSUBMITTED, CANCELLED, SUBMITTED, APPROVED]
         :return:
         '''
-        url = f"https://{hostname}/api/v1/scheduling/employee_timeoff/multi_read"
+        url = f"https://{self.hostname}/api/v1/scheduling/employee_timeoff/multi_read"
         json = await self.get_my_info()
         payload = { "where": { "employee": {
             "employeeRef": { "id": json['employeeId'] },
@@ -222,6 +222,31 @@ class Flex:
                     response_list.append(res)
         return response_list
 
+    async def approve_decline_employee_timeoff_request(self, request_id, action = 'APPROVED'):
+        url = f"https://{self.hostname}/api/v1/scheduling/timeoff/apply_update"
+        status_id = None
+        if action == "APPROVED":
+            status_id = 4
+        elif action == "CANCELLED":
+            status_id = 8
+        payload = { "changeState": {
+            "do": { "toStatus": {
+                "id": status_id
+            } },
+            "where": { "timeOffRequestId": request_id }
+        } }
+        headers = {
+            "accept": "application/json",
+            "content-type": "application/json",
+            'appkey': self.app_key,
+            "Authorization": self.access_token
+        }
+
+        response = requests.post(url, json=payload, headers=headers)
+
+        print(response.text)
+        return
+
     async def get_time_off_requests_employee(self,employee_list, startdate, enddate, status = "SUBMITTED"):
         '''
         :param startdate: start date filter in format YYYY-MM-DD
@@ -229,7 +254,7 @@ class Flex:
         :param status: current status, accespts the following values: [COMPLETE, INCOMPLETE]
         :return:
         '''
-        url = f"https://{hostname}/api/v1/scheduling/timeoff/multi_read"
+        url = f"https://{self.hostname}/api/v1/scheduling/timeoff/multi_read"
         response_list = {}
         for i in employee_list:
             response_list[i] = []
@@ -242,8 +267,8 @@ class Flex:
                             "employeeRefs": {
                                 "ids": empId_list
                             },
-                            "endDate": "2023-07-15",
-                            "startDate": "2023-07-15"
+                            "endDate": enddate,
+                            "startDate": startdate
                         }
                     }
                 }
@@ -260,8 +285,22 @@ class Flex:
                     response_list[i].append(res)
         return response_list
 
+    async def get_open_shift_request_subtypes(self):
+        import requests
+        
+        url = f"https://{self.hostname}/api/v1/scheduling/employee_open_shift_requests/request_subtypes"
+        
+        headers = {
+            "accept": "application/json",
+            'appkey': self.app_key,
+            "Authorization": self.access_token
+        }
+        
+        response = requests.get(url, headers=headers)
+        return response.json()
+
     async def cancel_time_off_request(self, timeoff_request_id):
-        url = f"https://{hostname}/api/v1/scheduling/employee_timeoff/apply_update"
+        url = f"https://{self.hostname}/api/v1/scheduling/employee_timeoff/apply_update"
 
         payload = { "changeState": {
             "do": { "toStatus": { "id": 8 } },
@@ -278,7 +317,28 @@ class Flex:
         # 
         return response.json()
 
+    async def request_open_shit(self, shift_id, version_id):
+        url = f"https://{self.hostname}/api/v1/scheduling/employee_open_shift_requests"
+        subtypes = await self.get_open_shift_request_subtypes()
+        payload = {
+            "requestSubType": { "id": subtypes[0]["id"] },
+            "requestedOpenShifts": [
+                {
+                    "scheduleItemId": shift_id,
+                    "scheduleItemVersion": version_id
+                }
+            ]
+        }
+        headers = {
+            "accept": "application/json",
+            "content-type": "application/json",
+            'appkey': self.app_key,
+            "Authorization": self.access_token
+        }
 
+        response = requests.post(url, json=payload, headers=headers)
+
+        print(response.text)
 
 
 async def main():
@@ -287,11 +347,15 @@ async def main():
     # print(await flexObj.get_my_shifts("2023-07-13", "2023-07-14"))
     # print(await flexObj.get_employees_info_by_username(['harshpundir']))
     # print(await flexObj.get_employee_shifts(['harshpundir'], "2023-07-13", "2023-07-13"))
-    # print(await flexObj.get_open_shifts("2023-07-15", "2023-07-15"))
-    # print(await flexObj.request_time_off_full_day_me("2023-07-25", "2023-07-25"))
+    # print(await flexObj.request_time_off_full_day_me("2023-07-17", "2023-07-17"))
     # print(await flexObj.get_time_off_requests_me("2023-07-25", "2023-07-25", "SUBMITTED"))
     # print(await flexObj.cancel_time_off_request(1353))
-    print(await flexObj.get_time_off_requests_employee(['harshpundir'],"2023-07-15", "2023-07-15"))
+    # print(await flexObj.get_time_off_requests_employee(['harshpundir'],"2023-07-17", "2023-07-17"))
+    print(await flexObj.approve_decline_employee_timeoff_request(1357, 'APPROVED'))
     # print(await flexObj.get_employees_info_by_id([1454]))
+    # print(await flexObj.get_open_shift_request_subtypes())
+    # print(await flexObj.get_open_shifts("2023-07-17", "2023-07-17"))
+    # print(await flexObj.request_open_shit('24203', '1689231277183'))
+
 
 asyncio.run(main())
