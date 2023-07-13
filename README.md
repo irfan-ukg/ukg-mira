@@ -61,12 +61,32 @@ But using the current generation AI, we see there is an immense opportunity to s
 ### Prerequisites
 
 1. Python 3.6 or higher
+2. For Mac OS
+>  brew install flac
+The above library is required to read audio files of multiple formats including ".wav"
 
 To install the required libraries, run:
 
 ```bash
 pip install -r requirements.txt
 ```
+
+### Known Bugs - Mitigation
+While using `pyttsx3` for the text to speech translation. We will see an error "AttributeError: 'super' object has no attribute 'init'".
+
+this turns out to be a little tricky. and this is a workaround! hope works for you.
+
+Under the hood, this module pyttsx3 uses PyObjC as a bridge between Python and Objective-C.
+
+Step 1: Check that pyobjc is installed(pip show pyobjc), if not install as pip install pyobjc.
+Step 2: open this file /usr/local/lib/python3.11/site-packages/pyttsx3/drivers/nsss.py and change the following:
+
+#self = super(NSSpeechDriver, self).init() comment this line , and add the following
+self = objc.super(NSSpeechDriver, self).init()
+
+[Source for the bug mitigation](https://stackoverflow.com/questions/76434535/attributeerror-super-object-has-no-attribute-init)
+
+
 ### Authentication For Flex API
 Flex APIs do not support application to application authentication, so currenlty users need to login once into the MIRA with their UKG Dimensions credintials. In future a federated login point will be implemented to use the same authentication for both Microsoft Teams and Flex APIs
 ### Setting up API keys
@@ -85,3 +105,9 @@ Run the program using the following command:
 ```bash
 python main.py
 ```
+
+### Useful Commands
+
+> conda remove -n mira-ukg --all
+> conda create --name=mira-ukg python=3.10
+
