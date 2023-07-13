@@ -34,17 +34,21 @@ But using the current generation AI, we see there is an immense opportunity to s
 
 #### Solution Development - Thinking Framework
 
-![Solution-Development (3)](https://github.com/irfan-ukg/ukg-mira/assets/117180317/8bda2f75-e0fa-4c9a-929c-37cd82528b43)
+![Solution-Development (3)](https://github.com/irfan-ukg/ukg-mira/assets/117180317/6e113250-bf7c-41e9-852b-ad5a46d2ad25)
+
 
 #### Leveraging Co-Pilot
-<img width="1512" alt="Screenshot 2023-07-13 at 7 47 48 PM" src="https://github.com/irfan-ukg/ukg-mira/assets/117180317/90040e92-5a1c-4abb-9825-53030c520b5e">
+<img width="1512" alt="Screenshot 2023-07-13 at 7 47 48 PM" src="https://github.com/irfan-ukg/ukg-mira/assets/117180317/a1e99809-7bae-4ab0-bd72-ccb9549da619">
+
 
 #### Leveraging Chat GPT
 
-<img width="1497" alt="Screenshot 2023-07-13 at 7 50 19 PM" src="https://github.com/irfan-ukg/ukg-mira/assets/117180317/ff77e30f-788c-4ee0-8205-10979776d91c">
+<img width="1497" alt="Screenshot 2023-07-13 at 7 50 19 PM" src="https://github.com/irfan-ukg/ukg-mira/assets/117180317/23afcd37-7131-430e-b08c-cc8814815fe1">
+
 
 #### Pushing the limits
-<img width="1512" alt="Screenshot 2023-07-13 at 12 25 06 AM" src="https://github.com/irfan-ukg/ukg-mira/assets/117180317/08036689-9eea-47f2-b927-81ea5fa5a885">
+
+<img width="1512" alt="Screenshot 2023-07-13 at 12 25 06 AM" src="https://github.com/irfan-ukg/ukg-mira/assets/117180317/06b18eed-91dd-416e-ae50-cfa53ee1753b">
 
 
 
@@ -53,8 +57,9 @@ But using the current generation AI, we see there is an immense opportunity to s
 ![Basic-Mira (1)](https://github.com/irfan-ukg/ukg-mira/assets/117180317/a06aa541-5d8f-4f80-ab8f-2e1c83fd6a1a)
 
 
+## Future Integration
+![FutureMira](https://github.com/irfan-ukg/ukg-mira/assets/117180317/14002b0b-8922-4526-a51f-1d86a84ffa69)
 
-![FutureMira](https://github.com/irfan-ukg/ukg-mira/assets/117180317/b429f6ee-c5ab-477a-9fa7-143387a3b074)
 
 ## Getting Started with Development
 
