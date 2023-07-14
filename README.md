@@ -12,6 +12,8 @@ MIRA is born as part of 48hrs hackathon held at our company on 11th - 13th July,
 
 Enhanced the meeting or shift scheduling experience for the Ukrewers, UKG Customers and their employees by leveraging the power of LLMs and providing the below features:
 
+MIRA leverages AI allowing users to use natural language _(via text or audio)_ to express their scheduling needs in any order and also allows the users to go out of domain and ask things like how is the weather today in Delhi, get answer and come back to the scheduling need.
+
 MIRA solution design is a combination of embeddings, prompt engineering and LLMs to achieve efficient natural languge scheduling query processing. It is implemented using the "microsoft teams apps", "langchain" and "streamlit" frameworks and employs a multi-layer approach for processing. MIRA is integrated with UKG Flex APIs and Microsoft Outlook Calendar APIs.
 
 
